@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8"/></head>
+  <body>
+    <div id="letter-picking-ui">
+      <!-- everything that relates to picking letters should go into this div-->
+
+      <button id="vowel" onclick=addVowel()>vowel</button>
+      <button id="consonant" onclick=addConsonant()>consonant</button>
+      <ul id = "letterlist">
+      </ul>
+    </div>
+
+    <div id="word-creating-ui">
+      <!-- when the vowels are picked, you have to pick your word by typing it in here -->
+      <input id="word" type="text" />
+      <button id="submit-word-button">finish</button>
+      <div id="timer"></div>
+    </div>
+
+    <script>
+      console.log("this is the game of countdown")
+
+      const vowelButton = document.querySelector("#vowel")
+      const consonantButton = document.querySelector("#consonant")
+      const wordInput = document.querySelector("#word")
+      const timer = document.querySelector("#timer")
+      const submitWordButton = document.querySelector("#submit-word-button")
+
+      function addVowel(){
+        if (document.getElementById("letterlist").getElementsByTagName('li').length<9){
+          var list = document.getElementById('letterlist');
+          var vowels = 'AAAAAAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEEIIIIIIIIIIIIIOOOOOOOOOOOOOUUUUU';
+          var entry = vowels[Math.floor(Math.random() * vowels.length)];
+          var li = document.createElement("li");
+          li.appendChild(document.createTextNode(entry));
+          list.appendChild(li);
+        }
+      };
+      function addConsonant(){
+        if (document.getElementById("letterlist").getElementsByTagName('li').length<9){
+          var list = document.getElementById('letterlist');
+          var consonants = 'BBCCCDDDDDDFFGGGHHJKLLLLLMMMMNNNNNNNNPPPPQRRRRRRRRRSSSSSSSSSTTTTTTTTTVWXYZ';
+          var entry = consonants[Math.floor(Math.random() * consonants.length)];
+          var li = document.createElement("li");
+          li.appendChild(document.createTextNode(entry));
+          list.appendChild(li);
+        }
+      };
+
+      // this should be visible when the game starts
+      const letterPickingUI = document.querySelector("letter-picking-ui")
+
+      // after you finish picking your letters, hide the previous ui and show this ui
+      const wordCreatingUI = document.querySelector("word-creating-ui")
+
+      // you're going to need to add a bunch of event listeners to the above divs to make them do what you want
+
+      function startTimer() {
+        const start = new Date().getTime()
+
+        setInterval(() => {
+          timer.innerText = (new Date().getTime() - start) / 1000 + "s"
+        })
+      }
+
+      startTimer()
+    </script>
+  </body>
+</html>
